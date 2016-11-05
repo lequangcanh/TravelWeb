@@ -20,6 +20,9 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Bowere
+bower_components/
+
 # Environment
 .rbenv-gemsets
 .ruby-version
