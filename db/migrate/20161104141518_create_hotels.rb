@@ -6,8 +6,7 @@ class CreateHotels < ActiveRecord::Migration[5.0]
       t.string :phone
       t.string :email
       t.string :website
-      t.string :details
-      t.string :text
+      t.text :details
       t.string :avatar
       t.integer :province_id
 

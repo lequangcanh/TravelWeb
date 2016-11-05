@@ -25,8 +25,7 @@ ActiveRecord::Schema.define(version: 20161104141757) do
     t.string   "phone"
     t.string   "email"
     t.string   "website"
-    t.string   "details"
-    t.string   "text"
+    t.text     "details"
     t.string   "avatar"
     t.integer  "province_id"
     t.datetime "created_at",  null: false
