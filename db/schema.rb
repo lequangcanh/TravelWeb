@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104141757) do
+ActiveRecord::Schema.define(version: 20161106123631) do
 
   create_table "hotel_photos", force: :cascade do |t|
     t.string   "image"
@@ -53,8 +53,10 @@ ActiveRecord::Schema.define(version: 20161104141757) do
     t.string   "avatar"
     t.text     "description"
     t.integer  "province_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.decimal  "view_count",           default: "0.0"
+    t.integer  "place_comments_count", default: 0
   end
 
   create_table "provinces", force: :cascade do |t|
