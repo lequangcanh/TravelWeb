@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
+//= require slick-carousel/slick/slick.min

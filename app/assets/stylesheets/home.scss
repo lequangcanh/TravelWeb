@@ -62,3 +62,22 @@
     color: white !important;
   }
 }
+
+.famous-places {
+  padding: 40px 0;
+  .place {
+    height: 280px;
+    padding: 10px;
+    div {
+      height: 100%;
+      border-radius: 10px;
+    }
+    .place-images {
+      .image-holder {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

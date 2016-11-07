@@ -1,4 +1,4 @@
-<div class="header-wrapper">
+<section class="header-wrapper">
   <header class="banner full-width" role="banner">
     <nav class="home-navbar navbar navbar-default">
       <div class="container-fluid">
@@ -54,8 +54,8 @@
       </div><!-- /.container-fluid -->
     </nav>
   </header>
-</div>
-<div class="hero-home">
+</section>
+<section class="hero-home">
   <div class="overlay top">
   </div>
   <div class="search">
@@ -85,28 +85,38 @@
       </div>
     </div>
   </div>
-</div>
-<div class="famous-places">
+</section>
+<section class="famous-places">
+  <h1 class="title text-center">MOST FAMOUS</h1>
+  <h3 class="text-center">The must-go places for all travellers...</h3>
   <% @famous_places.each_with_index do |place, inx| %>
-    <div class="row">
-      <div class="container">
-        <% if inx % 2 == 0 %>
-          <div class="col-md-8">
-            <img src= "<%= place. %>" alt="" />
-          </div>
-          <div class="col-md-4">
-            <h2><%= place.name %></h2>
-            <p><%= place.description%></p>
-          </div>
-        <% else %>
-          <div class="col-md-4">
-
-          </div>
-          <div class="col-md-8">
-
-          </div>
-        <% end %>
+    <div class="container place">
+      <% if inx % 2 == 0 %>
+        <div class="col-md-8 place-images">
+          <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
+          <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
+          <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
+          <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
+        </div>
+        <div class="col-md-4">
+          <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
+          <p><%= place.description%></p>
+        </div>
+      <% else %>
+        <div class="col-md-4">
+          <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
+          <p><%= place.description%></p>
+        </div>
+        <div class="col-md-8 place-images">
+          <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
+          <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
+          <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
+          <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
+        </div>
       <% end %>
     </div>
-  </div>
-</div>
+  <% end %>
+</section>
+<section class="more-places">
+  <h1 class="title text-center">Explore more...</h1>
+</section>
