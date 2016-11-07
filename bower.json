@@ -1,0 +1,23 @@
+{
+  "name": "TravelWeb",
+  "version": "1.0.0",
+  "description": "Sharing places for everyone want to travel.",
+  "authors": [
+    "canhlequang",
+    "mozart"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/lequangcanh/TravelWeb",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "moment": "^2.15.2",
+    "animate.css": "^3.5.2",
+    "bootstrap-sass": "^3.3.7"
+  },
+  "devDependencies": {}
+}
