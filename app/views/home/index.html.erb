@@ -86,37 +86,53 @@
     </div>
   </div>
 </section>
-<section class="famous-places">
-  <h1 class="title text-center">MOST FAMOUS</h1>
-  <h3 class="text-center">The must-go places for all travellers...</h3>
-  <% @famous_places.each_with_index do |place, inx| %>
-    <div class="container place">
-      <% if inx % 2 == 0 %>
-        <div class="col-md-8 place-images">
-          <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
-          <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
-          <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
-          <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
-        </div>
-        <div class="col-md-4">
-          <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
-          <p><%= place.description%></p>
-        </div>
-      <% else %>
-        <div class="col-md-4">
-          <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
-          <p><%= place.description%></p>
-        </div>
-        <div class="col-md-8 place-images">
-          <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
-          <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
-          <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
-          <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
-        </div>
-      <% end %>
+<div class="container">
+  <section class="famous-places">
+    <h1 class="title text-center">MOST FAMOUS</h1>
+    <h3 class="text-center">The must-go places for all travellers...</h3>
+    <% @famous_places.each_with_index do |place, inx| %>
+      <div class="container place">
+        <% if inx % 2 == 0 %>
+          <div class="col-md-8 place-images">
+            <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
+            <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
+            <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
+            <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
+          </div>
+          <div class="col-md-4">
+            <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
+            <p><%= place.description%></p>
+          </div>
+        <% else %>
+          <div class="col-md-4">
+            <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
+            <p><%= place.description %></p>
+          </div>
+          <div class="col-md-8 place-images">
+            <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
+            <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
+            <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
+            <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+</div>
+<div class="container">
+  <section class="more-places">
+    <h1 class="title text-center">Explore more...</h1>
+    <div class="row">
+      <div class="recent-places col-md-12">
+        <% @recent_places.each do |place| %>
+          <div class="place col-md-4">
+            <img src="" alt="" width="100%" height="250px"/>
+            <h3><%= place.name %></h3>
+            <span><i class="glyphicon glyphicon-comment" aria-hidden="true"></i><%= place.place_comments_count %></span>
+            <p><%= place.description %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-</section>
-<section class="more-places">
-  <h1 class="title text-center">Explore more...</h1>
-</section>
+  </section>
+</div>

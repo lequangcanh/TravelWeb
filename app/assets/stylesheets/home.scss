@@ -1,3 +1,10 @@
+@font-face {
+  font-family:"Montserrat";
+  src:font-url('fonts/Montserrat-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .hero-home {
   position: relative;
   background-image: image_url('hero-home-1.jpg');
@@ -27,6 +34,7 @@
       padding: 0;
     }
     h1 {
+      font-family: "Montserrat", sans-serif;
       color: white;
       text-align: center;
     }
@@ -80,4 +88,14 @@
       }
     }
   }
+}
+
+.slick-slider {
+  button::before {
+    color: black;
+  }
+}
+
+.glyphicon {
+  padding-right: 10px;
 }
