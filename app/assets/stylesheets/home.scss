@@ -34,9 +34,9 @@
       padding: 0;
     }
     h1 {
-      font-family: "Montserrat", sans-serif;
       color: white;
       text-align: center;
+      font-size: 48px;
     }
     .input-group {
       width: 100%;
@@ -68,6 +68,12 @@
   border: none !important;
   * {
     color: white !important;
+  }
+}
+
+section {
+  h1 {
+    font-family: "Montserrat", sans-serif;
   }
 }
 
