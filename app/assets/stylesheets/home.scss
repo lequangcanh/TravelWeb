@@ -37,6 +37,9 @@
       color: white;
       text-align: center;
       font-size: 48px;
+      @media screen and (max-width: 890px) {
+        font-size: 36px;
+      }
     }
     .input-group {
       width: 100%;
@@ -78,28 +81,63 @@ section {
 }
 
 .famous-places {
-  padding: 40px 0;
+  margin: 40px 0;
   .place {
-    height: 280px;
-    padding: 10px;
-    div {
+    // height: 280px;
+    margin: 15px;
+    // div {
+    //   width: 100%;
+    //   height: 100%;
+    //   border-radius: 10px;
+    // }
+    .slick-slider {
       height: 100%;
-      border-radius: 10px;
+      .slick-list {
+        height: 100%;
+        border-radius: 10px;
+        .slick-track {
+          height: 100%;
+          .slick-slide {
+            height: 100%;
+          }
+        }
+      }
     }
     .place-images {
       .image-holder {
         img {
           width: 100%;
+          border-radius: 10px;
         }
       }
     }
   }
+  .responsivewrapper {
+    position: relative;
+    padding-bottom: 28%;
+    > .hold {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
+.slider-wrapper {
+  width: 90%;
+  margin: auto;
+}
 .slick-slider {
   button::before {
     color: black;
   }
+}
+
+.float-wrapper {
+  vertical-align: center;
+  display: inline-block;
 }
 
 .glyphicon {
