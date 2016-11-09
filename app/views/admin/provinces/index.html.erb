@@ -1,9 +1,18 @@
 <h1>List Provinces</h1>
+<div class="row">
+  <div class="col-md-3">
+    <%= button_to "Create new province", new_admin_province_path, method: :get, 
+        class: "btn btn-primary" %>
+  </div>
+  <div class="col-md-9">
+    <%= form_tag(admin_provinces_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Provinces" %>
+      <%= submit_tag "Search", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
 
-<%= button_to "Create new province", new_admin_province_path, method: :get, 
-    class: "btn btn-primary" %>
-
-<table>
+<table class="table">
   <tr>
     <th>ID</th>
     <th>Province</th>
@@ -22,3 +31,4 @@
     </tr>
   <% end %>
 </table>
+<%= will_paginate %>

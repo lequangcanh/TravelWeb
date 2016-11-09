@@ -2,7 +2,12 @@ class Admin::ProvincesController < ApplicationController
   layout 'admin/layouts/admin_panel'
 
   def index
-    @provinces = Province.all
+    @provinces = Province.paginate(page: params[:page])
+    if params[:search]
+      @provinces = Province.search(params[:search]).paginate(page: params[:page])
+    else
+      @provinces = Province.paginate(page: params[:page])
+    end
   end
 
   def new
@@ -12,6 +17,7 @@ class Admin::ProvincesController < ApplicationController
   def create
     @province = Province.create(province_params)
     if @province.save
+      flash[:success] = "Created successfull"
       redirect_to admin_provinces_path
     else
       render 'new'
@@ -25,6 +31,7 @@ class Admin::ProvincesController < ApplicationController
   def update
     @province = Province.find(params[:id])
     if @province.update_attributes(province_params)
+      flash[:success] = "Updated successfull"
       redirect_to admin_province_path(@province)
 	else
 	  render 'edit'
@@ -37,6 +44,7 @@ class Admin::ProvincesController < ApplicationController
 
   def destroy
     Province.find(params[:id]).destroy
+    flash[:success] = "Delete successfull"
     redirect_to admin_provinces_path
   end
 
