@@ -1,0 +1,27 @@
+<h1>List Places</h1>
+
+<%= button_to "Create new Place", new_admin_place_path, method: :get, 
+    class: "btn btn-primary" %>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Place</th>
+    <th>Province</th>
+  </tr>
+
+  <% @places.each do |place| %>
+    <tr>
+      <td> <%= place.id %> </td>
+      <td> <%= place.name %> </td>
+      <td> <%= Province.find(place.province_id).name %> </td>
+      <td> <%= button_to "Details", admin_place_path(place), method: :get, 
+          class: "btn btn-default" %> </td>
+      <td> <%= button_to "Edit", edit_admin_place_path(place), method: :get, 
+          class: "btn btn-primary" %> </td>
+      <td> <%= button_to "Delete", admin_place_path(place), method: :delete,
+          data: {confirm: "Are you sure?"}, class: "btn btn-danger" %> </td>
+    </tr>
+  <% end %>
+</table>
+

@@ -1,0 +1,6 @@
+<h1>Place: <%= @place.name %></h1>
+<h3>Provice: <%= Province.find(@place.province_id).name %></h3>
+
+<div>
+  <%= @place.description %>
+</div>
