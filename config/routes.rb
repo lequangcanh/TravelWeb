@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :users
     resources :provinces
     resources :places
+    resources :hotels
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

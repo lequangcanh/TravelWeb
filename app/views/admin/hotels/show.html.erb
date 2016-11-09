@@ -1,0 +1,14 @@
+<h1>Hotel <%= @hotel.name %></h1>
+
+<div>
+  <p>
+    Address: <%= @hotel.address %>, 
+    province: <%= Province.find(@hotel.province_id).name %>
+  </p>
+  <p>Phone: <%= @hotel.phone %></p>
+  <p>Email: <%= @hotel.email %></p>
+  <p>Website: <%= @hotel.website %></p>
+</div>
+<div>
+  <%= @hotel.details %>
+</div>
