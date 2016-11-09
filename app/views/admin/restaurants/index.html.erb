@@ -1,0 +1,26 @@
+<h1>List Restaurants</h1>
+
+<%= button_to "Create new Restaurant", new_admin_restaurant_path, method: :get, 
+    class: "btn btn-primary" %>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Restaurant</th>
+    <th>Province</th>
+  </tr>
+
+  <% @restaurants.each do |r| %>
+    <tr>
+      <td> <%= r.id %> </td>
+      <td> <%= r.name %> </td>
+      <td> <%= Province.find(r.province_id).name %> </td>
+      <td> <%= button_to "Details", admin_restaurant_path(r), method: :get, 
+          class: "btn btn-default" %> </td>
+      <td> <%= button_to "Edit", edit_admin_restaurant_path(r), method: :get, 
+          class: "btn btn-primary" %> </td>
+      <td> <%= button_to "Delete", admin_restaurant_path(r), method: :delete,
+          data: {confirm: "Are you sure?"}, class: "btn btn-danger" %> </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,14 @@
+<h1>Restaurant <%= @restaurant.name %></h1>
+
+<div>
+  <p>
+    Address: <%= @restaurant.address %>, 
+    province: <%= Province.find(@restaurant.province_id).name %>
+  </p>
+  <p>Phone: <%= @restaurant.phone %></p>
+  <p>Email: <%= @restaurant.email %></p>
+  <p>Website: <%= @restaurant.website %></p>
+</div>
+<div>
+  <%= @restaurant.details %>
+</div>
