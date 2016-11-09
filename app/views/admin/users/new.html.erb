@@ -1,0 +1,12 @@
+<h1>Create a new User</h1>
+
+<%= form_for(@user, url: admin_users_path) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+  <%= f.submit "Save Change", class: "btn btn-primary" %>
+<% end %>

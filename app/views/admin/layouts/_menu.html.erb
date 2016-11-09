@@ -1,0 +1,17 @@
+<div class="wrap">
+  <div class="row">
+    <div class="col-md-3 menu-admin">
+      <ul>
+        <li>Provines</li>
+        <li>Places</li>
+        <li>Hotels</li>
+        <li>Restaurants</li>
+        <li> <%= link_to "Users", admin_users_path %> </li>
+      </ul>
+    </div>
+
+    <div class="col-md-9">
+      <%= yield %>
+    </div>
+  </div>
+</div>
