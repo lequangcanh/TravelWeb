@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1><%= @place.name %></h1>
+      <p><%= @place.description %></p>
+    </div>
+    <div class="col-md-6">
+      <div class="slider-for">
+        <% @place.place_photos.each do |photo| %>
+          <div><%= image_tag(photo.image.url.to_s) %></div>
+        <% end %>
+      </div>
+      <div class="slider-nav">
+        <% @place.place_photos.each do |photo| %>
+          <div><%= image_tag(photo.image.url.to_s) %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
