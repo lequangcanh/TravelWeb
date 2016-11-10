@@ -2,7 +2,12 @@ class Admin::UsersController < ApplicationController
   layout 'admin/layouts/admin_panel'
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page])
+    if params[:search]
+      @users = User.search(params[:search]).paginate(page: params[:page])
+    else
+      @users = User.paginate(page: params[:page])
+    end
   end
 
   def show
@@ -16,7 +21,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Update successfull"
+      flash[:success] = "User is updated successfull"
       redirect_to admin_user_url(@user)
     else
       render 'edit'
@@ -25,7 +30,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "User is deleted successfully"
     redirect_to admin_users_url
   end
 
@@ -36,7 +41,8 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
-      redirect_to admin_users_path
+      flash[:success] = "New user is created successfully"
+      redirect_to admin_user_path(@user)
     else
       render 'new'
     end
@@ -44,6 +50,7 @@ class Admin::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, 
+        :password, :password_confirmation, :is_admin)
   end
 end

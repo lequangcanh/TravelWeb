@@ -28,3 +28,13 @@ province_names.each { |province_name|
                description: Faker::Lorem.paragraph(2),
                province_id: Faker::Number.between(0, 63))
 end
+
+99.times do |n|
+  name  = Faker::Name.name
+  email = "example-#{n+1}@travel.org"
+  password = "password"
+  User.create!(name:  name,
+               email: email,
+               password:              password,
+               password_confirmation: password)
+end

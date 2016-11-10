@@ -4,7 +4,7 @@
       <h1>Create a new Province</h1>
 
       <%= form_for(@province, url: admin_provinces_path) do |f| %>
-        <%= render 'admin/provinces/error_messages' %>
+        <%= render partial: 'admin/layouts/error_messages', locals: {zone: @province} %>
         <div class="form-group">
           <%= f.label :name %>
           <%= f.text_field :name, class: 'form-control' %>
