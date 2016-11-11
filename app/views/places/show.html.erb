@@ -5,14 +5,18 @@
       <p><%= @place.description %></p>
     </div>
     <div class="col-md-6">
-      <div class="slider-for">
-        <% @place.place_photos.each do |photo| %>
-          <div><%= image_tag(photo.image.url.to_s) %></div>
-        <% end %>
+      <div class="responsivewrapper">
+        <div class="hold">
+          <div class="slider-for">
+            <% @place.place_photos.each do |photo| %>
+              <div><%= image_tag(photo.image.url) %></div>
+            <% end %>
+          </div>
+        </div>
       </div>
       <div class="slider-nav">
         <% @place.place_photos.each do |photo| %>
-          <div><%= image_tag(photo.image.url.to_s) %></div>
+          <div><%= image_tag(photo.image.url) %></div>
         <% end %>
       </div>
     </div>

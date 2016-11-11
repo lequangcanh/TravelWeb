@@ -12,6 +12,8 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
+    @place.view_count += 1
+    @place.save!
   end
 
   def create
