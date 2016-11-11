@@ -1,0 +1,27 @@
+<% flash.each do |message_type, messages| %>
+  <div class="alert alert-<%= message_type %> alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <% if messages.class.name == 'Array' %>
+      <% messages.each do |message| %>
+        <%= message %>
+      <% end %>
+    <% else %>
+      <%= messages %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="container">
+  <%= form_for(@place, html: {multipart: true}) do |f| %>
+    <%= label_tag :name, "Name: " %>
+    <%= f.text_field :name , class:"form-control"%>
+    <%= label_tag :province_id, "Province: " %>
+    <%= f.select :province_id, options_for_select(@provinces.map { |u| [u.name, u.id] }), {}, class:"form-control" %>
+    <%= label_tag :description, "Description: " %>
+    <%= f.text_area :description, class:"form-control" %>
+    <label for="file">Photos: </label> <%= file_field :photos, :files, multiple: "multiple", accept: "image/*", id: "photos" %>
+    <div class="image-holder"></div>
+    <div class="clearfix"></div>
+    <%= f.submit %>
+  <% end %>
+</div>
