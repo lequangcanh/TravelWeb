@@ -106,7 +106,7 @@
             <% else %>
               <%= image_tag place.place_photos.first.try(:image).try(:url), height: '100%', width: 'auto' %>
             <% end %>
-            <h3><%= link_to place.name, place_path(place) %></h3>
+            <h3><%= link_to place.name, place_path(place), method: :get %></h3>
             <span><i class="glyphicon glyphicon-comment" aria-hidden="true"></i><%= place.place_comments_count %></span>
             <p><%= place.description %></p>
           </div>

@@ -12,6 +12,7 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
+    @comments = @place.place_comments
     @place.view_count += 1
     @place.save!
   end
@@ -19,10 +20,10 @@ class PlacesController < ApplicationController
   def create
     result = create_place(params)
     if result[:errors].empty?
-      flash[:success] = "#{params[:place][:name]} created successfully."
+      flash.now[:success] = "#{params[:place][:name]} created successfully."
       redirect_to result[:place]
     else
-      flash[:danger] = result[:errors]
+      flash.now[:danger] = result[:errors]
       redirect_back(fallback_location: root_path)
     end
   end

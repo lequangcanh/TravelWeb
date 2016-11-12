@@ -1,3 +1,4 @@
+<%= render 'partials/navbar' %>
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -21,5 +22,18 @@
       </div>
     </div>
   </div>
+</div>
 
+<div class="container">
+  <%= @comments.each do |comment| %>
+    <div class="row">
+      <div class="col-md-2">
+        <img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="150px" height="150px"/>
+      </div>
+      <div class="col-md-10">
+        <p><%= comment.user.name %></p>
+        <p><%= comment.content %></p>
+      </div>
+    </div>
+  <% end %>
 </div>
