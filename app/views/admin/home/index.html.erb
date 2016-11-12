@@ -1,1 +1,15 @@
-Home
+<div class="center jumbotron">
+  <h1>Welcome <%= current_user.name %>!!!</h1>
+
+  <h2>
+    Now, you can manage your website data
+  </h2>
+
+  <h3>Click a button to visit Data Management Page</h3>
+
+  <%= link_to "Provinces", admin_provinces_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "Places", admin_places_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "Hotels", admin_hotels_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "Restaurants", admin_restaurants_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "Users", admin_users_path, class: "btn btn-lg btn-primary" %>
+</div>

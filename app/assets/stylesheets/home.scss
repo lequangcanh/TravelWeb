@@ -5,6 +5,18 @@
   font-style: normal;
 }
 
+.navbar-default .navbar-nav > .open > a {
+  background-color: transparent !important;
+}
+
+.dropdown-menu {
+  background-color: white !important;
+}
+
+.dropdown-menu > li > a {
+  color: black !important;
+}
+
 .hero-home {
   position: relative;
   background-image: image_url('hero-home-1.jpg');

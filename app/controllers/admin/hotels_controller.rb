@@ -1,5 +1,4 @@
-class Admin::HotelsController < ApplicationController
-  layout 'admin/layouts/admin_panel'
+class Admin::HotelsController < Admin::BaseController
 
   def index
     @hotels = Hotel.all

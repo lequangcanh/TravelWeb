@@ -1,5 +1,11 @@
 <h1>Hotel <%= @hotel.name %></h1>
 
+<div class="container">
+<%= link_to "Edit", edit_admin_hotel_path, method: :get %>
+<%= link_to "Delete", admin_hotel_path, method: :delete,
+    data: {confirm: "Are you sure?"} %>
+</div>
+
 <div>
   <p>
     Address: <%= @hotel.address %>, 
@@ -12,3 +18,5 @@
 <div>
   <%= @hotel.details %>
 </div>
+
+<%= link_to "Back", admin_hotels_path %>

@@ -1,5 +1,4 @@
-class Admin::PlacesController < ApplicationController
-  layout 'admin/layouts/admin_panel'
+class Admin::PlacesController < Admin::BaseController
 
   def index
     @places = Place.paginate(page: params[:page])

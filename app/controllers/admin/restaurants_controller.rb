@@ -1,5 +1,4 @@
-class Admin::RestaurantsController < ApplicationController
-  layout 'admin/layouts/admin_panel'
+class Admin::RestaurantsController < Admin::BaseController
 
   def index
     @restaurants = Restaurant.all

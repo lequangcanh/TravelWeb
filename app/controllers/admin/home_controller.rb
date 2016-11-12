@@ -1,5 +1,5 @@
-class Admin::HomeController < ApplicationController
-  layout 'admin/layouts/admin_panel'
+class Admin::HomeController < Admin::BaseController
   def index
   end
+
 end

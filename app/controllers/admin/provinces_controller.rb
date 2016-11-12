@@ -1,5 +1,4 @@
-class Admin::ProvincesController < ApplicationController
-  layout 'admin/layouts/admin_panel'
+class Admin::ProvincesController < Admin::BaseController
 
   def index
     @provinces = Province.paginate(page: params[:page])

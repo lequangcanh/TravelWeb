@@ -1,5 +1,4 @@
-class Admin::PlacePhotosController < ApplicationController
-  layout 'admin/layouts/admin_panel'
+class Admin::PlacePhotosController < Admin::BaseController
 
   def index
     @place_photos = PlacePhoto.all

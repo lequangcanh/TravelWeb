@@ -9,12 +9,17 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Panel - Travel Web</title>
+  <title>Admin Panel - GreenMile</title>
 </head>
 
 <body>
   <%= render 'admin/layouts/header' %>
-  <%= render 'admin/layouts/menu' %>
+  <div class="col-md-8 col-md-offset-2">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+    <%= yield %>
+  </div>
   
 </body>
 

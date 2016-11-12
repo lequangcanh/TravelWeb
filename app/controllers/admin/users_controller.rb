@@ -1,5 +1,4 @@
-class Admin::UsersController < ApplicationController
-  layout 'admin/layouts/admin_panel'
+class Admin::UsersController < Admin::BaseController
 
   def index
     @users = User.paginate(page: params[:page])

@@ -1,5 +1,11 @@
 <h1>Restaurant <%= @restaurant.name %></h1>
 
+<div class="container">
+<%= link_to "Edit", edit_admin_restaurant_path, method: :get %>
+<%= link_to "Delete", admin_restaurant_path, method: :delete,
+    data: {confirm: "Are you sure?"} %>
+</div>
+
 <div>
   <p>
     Address: <%= @restaurant.address %>, 
@@ -12,3 +18,5 @@
 <div>
   <%= @restaurant.details %>
 </div>
+
+<%= link_to "Back", admin_restaurants_path %>
