@@ -1,7 +1,4 @@
 class Province < ApplicationRecord
-  has_many :places
-  has_many :hotels
-  has_many :restaurants
 
   self.per_page = 10 #pagination
   validates :name, presence: true, length: {maximum: 255}
@@ -9,4 +6,8 @@ class Province < ApplicationRecord
   def self.search(search)
     where("name LIKE ?", "%#{search}%") 
   end
+
+  has_many :places, dependent: :restrict_with_error
+  has_many :hotels, dependent: :restrict_with_error
+  has_many :restaurants, dependent: :restrict_with_error
 end

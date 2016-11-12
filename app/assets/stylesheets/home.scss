@@ -1,17 +1,55 @@
+@font-face {
+  font-family:"Montserrat";
+  src:font-url('fonts/Montserrat-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .hero-home {
-  top: 0;
+  position: relative;
   background-image: image_url('hero-home-1.jpg');
   background-size: 100% auto;
   background-position: center;
   background-repeat: no-repeat;
   height: 40vw;
   .overlay.top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     background: linear-gradient(to bottom,
                                 rgba(0,0,0,0.5) 0%,
                                 rgba(0,0,0,0.06) 88%,
                                 rgba(210,210,210,0) 99%,
                                 rgba(229,229,229,0) 100%);
-    min-height: 100px;  
+    min-height: 100px;
+  }
+  .search {
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    [class*="col-"] {
+      padding: 0;
+    }
+    h1 {
+      color: white;
+      text-align: center;
+      font-size: 48px;
+      @media screen and (max-width: 890px) {
+        font-size: 36px;
+      }
+    }
+    .input-group {
+      width: 100%;
+      .btn {
+        width: inherit;
+      }
+      .form-control {
+        border-radius: 6px;
+      }
+    }
   }
 }
 
@@ -29,7 +67,88 @@
 }
 
 .home-navbar {
+  background-color: transparent !important;
+  border: none !important;
   * {
-    color: white;
+    color: white !important;
   }
+}
+
+section {
+  h1 {
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+.famous-places {
+  margin: 40px 0;
+  .place {
+    margin: 15px;
+    .responsivewrapper {
+      padding-bottom: 26%;
+    }
+    .slick-list {
+      border-radius: 10px;
+    }
+    .place-images {
+      .image-holder {
+        img {
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+.slick-slider {
+  height: 100%;
+  .slick-list {
+    height: 100%;
+    .slick-track {
+      height: 100%;
+      .slick-slide {
+        height: 100%;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.responsivewrapper {
+  position: relative;
+  padding-bottom: 52.5%;
+  > .hold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.slider-wrapper {
+  width: 90%;
+  margin: auto;
+}
+.slick-slider {
+  button::before {
+    color: black;
+  }
+}
+
+.float-wrapper {
+  vertical-align: center;
+  display: inline-block;
+}
+
+.glyphicon {
+  padding-right: 10px;
 }

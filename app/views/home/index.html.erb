@@ -1,0 +1,117 @@
+<div class="full-width">
+  <section class="header-wrapper">
+    <header class="banner" role="banner">
+      <nav class="home-navbar navbar navbar-default">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to('Places', places_path) %></li>
+              <li><%= link_to('Sign in', new_user_session_path) %></li>
+              <li><%= link_to('Sign up', new_user_registration_path) %></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </header>
+  </section>
+</div>
+<div class="full-width">
+  <section class="hero-home">
+    <div class="overlay top">
+    </div>
+    <div class="search">
+      <h1>Find your place to travel</h1>
+      <div class="row">
+        <div class="col-md-10 col-xs-10">
+          <div class="col-md-6 col-xs-6">
+            <div class="input-group input-group-lg">
+              <input type="text" class="form-control" placeholder="Place" aria-describedby="sizing-addon1">
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-6">
+            <div class="input-group input-group-lg">
+              <%= select_tag('province_id', options_from_collection_for_select(@provinces, 'id', 'name'), prompt: 'City, Province...', class: 'form-control') %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-xs-2">
+          <div class="input-group input-group-lg">
+            <button class="btn btn-default btn-lg" type="button" name="button">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+<div class="container">
+  <section class="famous-places">
+    <h1 class="title text-center">Most famous</h1>
+    <h3 class="text-center">The must-go places for all travellers...</h3>
+    <% @famous_places.each_with_index do |place, inx| %>
+      <div class="row place">
+        <% if inx % 2 == 0 %>
+          <div class="col-md-8 col-xs-6 responsivewrapper">
+            <div class="hold">
+              <div class="place-images">
+                <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
+                <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
+                <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
+                <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-6">
+            <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
+            <p><%= place.description%></p>
+          </div>
+        <% else %>
+          <div class="col-md-4 col-xs-6">
+            <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
+            <p><%= place.description%></p>
+          </div>
+          <div class="col-md-8 col-xs-6 responsivewrapper">
+            <div class="hold">
+              <div class="place-images">
+                <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
+                <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
+                <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
+                <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+  <section class="more-places">
+    <h1 class="title text-center"><%= link_to('Explore more', places_path,) %></h1>
+    <div class="slider-wrapper">
+      <div class="row recent-places">
+        <% @recent_places.each do |place| %>
+          <div class="place col-md-12">
+            <% if place.place_photos.empty? %>
+              <img src="" alt="" width="100%" height="250px"/>
+            <% else %>
+              <%= image_tag place.place_photos.first.try(:image).try(:url), height: '100%', width: 'auto' %>
+            <% end %>
+            <h3><%= link_to place.name, place_path(place), method: :get %></h3>
+            <span><i class="glyphicon glyphicon-comment" aria-hidden="true"></i><%= place.place_comments_count %></span>
+            <p><%= place.description %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>
