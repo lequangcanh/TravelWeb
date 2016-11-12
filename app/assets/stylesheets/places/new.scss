@@ -1,0 +1,10 @@
+.image-holder {
+  .image-wrapper {
+    height: 200px;
+    float: left;
+    display: inline-block;
+    img {
+      height: 100%;
+    }
+  }
+}
