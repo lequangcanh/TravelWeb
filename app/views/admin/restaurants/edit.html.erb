@@ -1,0 +1,42 @@
+<h1>Update Restaurant</h1>
+
+<%= form_for(@restaurant, url: admin_restaurant_path) do |f| %>
+  <%= render partial: 'admin/layouts/error_messages', locals: {zone: @restaurant} %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :province %>
+    <%= f.collection_select :province_id, Province.all, :id, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone %>
+    <%= f.telephone_field :phone, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website %>
+    <%= f.url_field :website, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :details %>
+    <%= f.text_area :details, class: "form-control" %>
+  </div>
+  
+  <%= f.submit "Save change", class: "btn btn-primary" %>
+<% end %>

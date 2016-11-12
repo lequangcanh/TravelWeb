@@ -1,0 +1,15 @@
+<h1>Place Photos Management</h1>
+
+<div class="row">
+  <%= collection_select(:place, :province_id, Province.all, :id, :name, 
+      {onchange: "getPlaces()"} ) %>
+  <%= collection_select(:place_photo, :place_id, 
+      Place.getPlacesOfProvince(1), :id, :name) %>
+</div>
+
+<script>
+  function getPlaces() {
+    var x = document.getElementById("place_province_id");
+    return x;
+  }
+</script>

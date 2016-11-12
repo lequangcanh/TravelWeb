@@ -1,0 +1,22 @@
+<h1>Restaurant <%= @restaurant.name %></h1>
+
+<div class="container">
+<%= link_to "Edit", edit_admin_restaurant_path, method: :get %>
+<%= link_to "Delete", admin_restaurant_path, method: :delete,
+    data: {confirm: "Are you sure?"} %>
+</div>
+
+<div>
+  <p>
+    Address: <%= @restaurant.address %>, 
+    province: <%= Province.find(@restaurant.province_id).name %>
+  </p>
+  <p>Phone: <%= @restaurant.phone %></p>
+  <p>Email: <%= @restaurant.email %></p>
+  <p>Website: <%= @restaurant.website %></p>
+</div>
+<div>
+  <%= @restaurant.details %>
+</div>
+
+<%= link_to "Back", admin_restaurants_path %>

@@ -11,17 +11,45 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <%= link_to('GreenMile', root_path, class: "navbar-brand", method: :get) %>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to('Places', places_path) %></li>
-              <li><%= link_to('Sign in', new_user_session_path) %></li>
-              <li><%= link_to('Sign up', new_user_registration_path) %></li>
+              <li><%= link_to('Places', places_path, method: :get) %></li>
+              <li><%= link_to('Hotels', "places_path" , method: :get) %></li>
+              <li><%= link_to('Restaurants', "places_path", method: :get) %></li>
+              <% if current_user.present? %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                    role="button"   aria-haspopup="true" aria-expanded="false"> 
+                    <span class="glyphicon glyphicon-user"></span> 
+                    <%= current_user.name %> <span class="caret"></span>
+                  </a>
+
+                  <ul class="dropdown-menu">
+                    <% if current_user.is_admin? %>
+                      <li><%= link_to('Admin Panel', admin_root_path, 
+                          method: :get) %></li>
+                    <% end %>
+                    <li><%= link_to('Edit Profile', edit_user_registration_path, 
+                        method: :get) %></li>
+                    <li><%= link_to('Sign out', destroy_user_session_path, 
+                        method: :delete) %></li>
+                  </ul>
+
+                </li>
+                
+              <% else %>
+                <li><%= link_to('Sign in', new_user_session_path, method: :get) %></li>
+                <li>
+                  <%= link_to('Sign up', new_user_registration_path, method: :get) %>
+                </li>
+              <% end %>
             </ul>
           </div><!-- /.navbar-collapse -->
+
         </div><!-- /.container-fluid -->
       </nav>
     </header>
@@ -101,8 +129,12 @@
       <div class="row recent-places">
         <% @recent_places.each do |place| %>
           <div class="place col-md-12">
-            <img src="" alt="" width="100%" height="250px"/>
-            <h3><%= place.name %></h3>
+            <% if place.place_photos.empty? %>
+              <img src="" alt="" width="100%" height="250px"/>
+            <% else %>
+              <%= image_tag place.place_photos.first.try(:image).try(:url), height: '100%', width: 'auto' %>
+            <% end %>
+            <h3><%= link_to place.name, place_path(place), method: :get %></h3>
             <span><i class="glyphicon glyphicon-comment" aria-hidden="true"></i><%= place.place_comments_count %></span>
             <p><%= place.description %></p>
           </div>

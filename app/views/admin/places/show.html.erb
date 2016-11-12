@@ -1,0 +1,13 @@
+<h1>Place: <%= @place.name %></h1>
+<h3>Provice: <%= Province.find(@place.province_id).name %></h3>
+<div class="container">
+<%= link_to "Edit", edit_admin_place_path, method: :get %>
+<%= link_to "Delete", admin_place_path, method: :delete,
+    data: {confirm: "Are you sure?"} %>
+</div>
+<div>
+  <h3>Description: </h3>
+  <%= @place.description %>
+</div>
+
+<%= link_to "Back", admin_places_path %>

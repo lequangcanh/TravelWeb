@@ -1,0 +1,16 @@
+<h1>Edit province: <%= @province.name %></h1>
+<%= form_for(@province, url: admin_province_path) do |f| %>
+  <%= render partial: 'admin/layouts/error_messages', locals: {zone: @province} %>
+  
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <%= f.submit "Save Change", class: "btn btn-primary" %>
+<% end %>

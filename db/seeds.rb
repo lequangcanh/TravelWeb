@@ -20,11 +20,21 @@ province_names = ["An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc K�
                   "Yên Bái", "Phú Yên", "Cần Thơ", "Đà Nẵng", "Hải Phòng",
                   "Hà Nội", "TP HCM"].sort!
 province_names.each { |province_name|
-  Province.create(name: province_name)
+  Province.create!(name: province_name)
 }
 
 120.times do
-  Place.create(name: Faker::Company.name,
+  Place.create!(name: Faker::Company.name,
                description: Faker::Lorem.paragraph(2),
-               province_id: Faker::Number.between(0, 63))
+               province_id: Faker::Number.between(1, 63))
+end
+
+99.times do |n|
+  name  = Faker::Name.name
+  email = "example-#{n+1}@travel.org"
+  password = "password"
+  User.create!(name:  name,
+               email: email,
+               password:              password,
+               password_confirmation: password)
 end

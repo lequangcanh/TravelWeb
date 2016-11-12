@@ -1,0 +1,22 @@
+<h1>Create new Place</h1>
+
+<%= form_for(@place, url: admin_places_path) do |f| %>
+  <%= render partial: 'admin/layouts/error_messages', locals: {zone: @place} %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :province %>
+    <%= f.collection_select :province_id, Province.all, :id, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+  
+  <%= f.submit "Create", class: "btn btn-primary" %>
+<% end %>

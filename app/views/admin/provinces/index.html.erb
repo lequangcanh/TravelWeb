@@ -1,0 +1,34 @@
+<h1>List Provinces</h1>
+<div class="row">
+  <div class="col-md-3">
+    <%= button_to "Create new province", new_admin_province_path, method: :get, 
+        class: "btn btn-primary" %>
+  </div>
+  <div class="col-md-9">
+    <%= form_tag(admin_provinces_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Provinces" %>
+      <%= submit_tag "Search", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Province</th>
+  </tr>
+
+  <% @provinces.each do |p| %>
+    <tr>
+      <td> <%= p.id %> </td>
+      <td> <%= p.name %> </td>
+      <td> <%= button_to "Details", admin_province_path(p), method: :get, 
+          class: "btn btn-default" %> </td>
+      <td> <%= button_to "Edit", edit_admin_province_path(p), method: :get, 
+          class: "btn btn-primary" %> </td>
+      <td> <%= button_to "Delete", admin_province_path(p), method: :delete,
+          data: {confirm: "Are you sure?"}, class: "btn btn-danger" %> </td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate %>
