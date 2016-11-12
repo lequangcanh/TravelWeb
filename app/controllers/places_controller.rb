@@ -2,7 +2,12 @@ class PlacesController < ApplicationController
   include Places
 
   def index
-
+    @places = Place.all
+    if params[:province_id].empty?
+      @places = Place.search(params[:search])
+    else
+      @places = Place.search(params[:search],params[:province_id])
+    end
   end
 
   def new

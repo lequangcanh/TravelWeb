@@ -61,25 +61,30 @@
     </div>
     <div class="search">
       <h1>Find your place to travel</h1>
-      <div class="row">
-        <div class="col-md-10 col-xs-10">
-          <div class="col-md-6 col-xs-6">
-            <div class="input-group input-group-lg">
-              <input type="text" class="form-control" placeholder="Place" aria-describedby="sizing-addon1">
+      <!-- Begin Search Places Form -->
+      <%= form_tag(places_path, :method => "get", id: "search-form") do %>
+        <div class="row">
+          <div class="col-md-10 col-xs-10">
+            <div class="col-md-6 col-xs-6">
+              <div class="input-group input-group-lg">
+                <%= text_field_tag :search, params[:search], 
+                  placeholder: "Search Places ....", class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-6">
+              <div class="input-group input-group-lg">
+                <%= select_tag('province_id', options_from_collection_for_select(@provinces, 'id', 'name'), prompt: 'City, Province...', class: 'form-control') %>
+              </div>
             </div>
           </div>
-          <div class="col-md-6 col-xs-6">
+          <div class="col-md-2 col-xs-2">
             <div class="input-group input-group-lg">
-              <%= select_tag('province_id', options_from_collection_for_select(@provinces, 'id', 'name'), prompt: 'City, Province...', class: 'form-control') %>
+              <%= submit_tag "Search", class: "btn btn-default btn-lg" %>
             </div>
           </div>
         </div>
-        <div class="col-md-2 col-xs-2">
-          <div class="input-group input-group-lg">
-            <button class="btn btn-default btn-lg" type="button" name="button">Search</button>
-          </div>
-        </div>
-      </div>
+      <% end %>
+      <!-- End of Search places form -->
     </div>
   </section>
   </div>

@@ -8,12 +8,7 @@ class Place < ApplicationRecord
 
   self.per_page = 10 #pagination
 
-  def self.search(search)
-    where("name LIKE ?", "%#{search}%") 
+  def self.search(place_input, province_input="%")
+    where("name LIKE ? AND province_id LIKE ?", "%#{place_input}%", province_input) 
   end
-
-  def self.getPlacesOfProvince(id)
-    where("province_id = ?", id)
-  end
-
 end

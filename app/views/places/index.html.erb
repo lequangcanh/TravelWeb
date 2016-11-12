@@ -1,0 +1,15 @@
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Place</th>
+    <th>Province</th>
+  </tr>
+
+  <% @places.each do |place| %>
+    <tr>
+      <td> <%= place.id %> </td>
+      <td> <%= place.name %> </td>
+      <td> <%= Province.find(place.province_id).name %> </td>
+    </tr>
+  <% end %>
+</table>
