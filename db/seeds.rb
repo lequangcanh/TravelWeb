@@ -24,17 +24,31 @@ province_names.each { |province_name|
 }
 
 120.times do
-  Place.create(name: Faker::Company.name,
-               description: Faker::Lorem.paragraph(2),
-               province_id: Faker::Number.between(0, 63))
+  Place.new(name: Faker::Company.name,
+            description: Faker::Lorem.paragraph(2),
+            province_id: Faker::Number.between(1, 63)).save(validate: false)
 end
 
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@travel.org"
   password = "password"
-  User.create!(name:  name,
-               email: email,
-               password:              password,
-               password_confirmation: password)
+  begin
+    User.create!(name:  name,
+                 email: email,
+                 password:              password,
+                 password_confirmation: password)
+  rescue ActiveRecord::RecordInvalid => e
+    puts e.record.errors.full_messages
+  end
+end
+
+Place.all.each do |place|
+  50.times do
+    offset = rand(User.count)
+    random_user = User.offset(offset).first
+    place.place_comments.create(date: Time.zone.now,
+                                content: Faker::Lorem.paragraph(2),
+                                user_id: random_user.id)
+  end
 end

@@ -4,5 +4,5 @@ class Place < ApplicationRecord
   has_many :place_comments, dependent: :destroy
 
   validates :name, presence: true
-  validates :place_photos, length: {minimum: 1, too_short: 'are required, at least 1'}
+  # validates :place_photos, length: {minimum: 1, too_short: 'are required, at least 1'}
 end

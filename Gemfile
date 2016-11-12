@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 # Uploading files
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+# Bring controller variables to JS
+gem 'gon'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
