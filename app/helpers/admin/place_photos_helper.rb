@@ -1,0 +1,2 @@
+module Admin::PlacePhotosHelper
+end

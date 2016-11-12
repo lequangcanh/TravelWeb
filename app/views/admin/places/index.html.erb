@@ -1,9 +1,18 @@
 <h1>List Places</h1>
 
-<%= button_to "Create new Place", new_admin_place_path, method: :get, 
-    class: "btn btn-primary" %>
-
-<table>
+<div class="row">
+  <div class="col-md-3">
+    <%= button_to "Create new place", new_admin_place_path, method: :get, 
+        class: "btn btn-primary" %>
+  </div>
+  <div class="col-md-9">
+    <%= form_tag(admin_places_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Places" %>
+      <%= submit_tag "Search", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+<table class="table">
   <tr>
     <th>ID</th>
     <th>Place</th>
@@ -25,3 +34,4 @@
   <% end %>
 </table>
 
+<%= will_paginate %>
