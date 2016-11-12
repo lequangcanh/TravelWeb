@@ -42,7 +42,7 @@ class Admin::HotelsController < ApplicationController
 
   private
   def hotel_params
-    params.require(:hotel).permit(:name, :avatar, :province_id, :address, :phone, 
+    params.require(:hotel).permit(:name, :province_id, :address, :phone, 
         :email, :website, :details)
   end
 end

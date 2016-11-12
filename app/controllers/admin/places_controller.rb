@@ -47,6 +47,6 @@ class Admin::PlacesController < ApplicationController
 
   private 
   def place_params
-    params.require(:place).permit(:name, :avatar, :description, :province_id)
+    params.require(:place).permit(:name, :description, :province_id)
   end
 end
