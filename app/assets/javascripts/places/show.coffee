@@ -1,4 +1,4 @@
-$('.places.show').ready ->
+$(document).on 'turbolinks:load', ->
   $('.slider-for').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
