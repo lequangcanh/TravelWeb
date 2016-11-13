@@ -26,15 +26,40 @@
 </div>
 
 <div class="container">
-  <div class="col-md-8 comments">
+  <h3>Comments</h3>
+  <% if current_user.present? %>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-1"><img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/></div>
+        <div class="col-md-11 comment-creation">
+          <%= form_for @comment, url: place_place_comments_path(@place) do |f| %>
+            <input type="hidden" name="place_id" value="<%= @place.id %>">
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+            <textarea name="content" style="width:100%; overflow-y:scroll" rows="3"></textarea>
+            <%= f.submit %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="col-md-8 comment-posts">
+    <div class="row sample-comment" style="display:none;">
+      <div class="col-md-1 user-image">
+        <img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/>
+      </div>
+      <div class="col-md-11">
+        <p class="username"><strong></strong></p>
+        <p class="content"></p>
+      </div>
+    </div>
     <% @comments.each do |comment| %>
       <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-1 user-image">
           <img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/>
         </div>
         <div class="col-md-11">
-          <p><strong><%= comment.user.name %></strong></p>
-          <p><%= comment.content %></p>
+          <p class="username"><strong><%= comment.user.name %></strong></p>
+          <p class="content"><%= comment.content %></p>
         </div>
       </div>
     <% end %>
