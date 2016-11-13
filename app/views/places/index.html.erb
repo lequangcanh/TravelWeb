@@ -1,15 +1,19 @@
-<table class="table">
-  <tr>
-    <th>ID</th>
-    <th>Place</th>
-    <th>Province</th>
-  </tr>
+<%= render 'partials/header' %>
 
+<div class="container">
   <% @places.each do |place| %>
-    <tr>
-      <td> <%= place.id %> </td>
-      <td> <%= place.name %> </td>
-      <td> <%= Province.find(place.province_id).name %> </td>
-    </tr>
+    <div class="row list-place">
+      <div class="col-md-5 col-md-offset-1">
+        <img src="/uploads/place_photo/image/9/173.jpg" alt="<%= place.name %>" height="200px" width="100%">
+      </div>
+      <div class="col-md-5 col-md-offset-1">
+        <h1> <%= link_to place.name, place_path(place) %> </h1>
+        <p> <%= place.description %> </p>
+      </div>
+    </div>
+    <hr>
   <% end %>
-</table>
+  <div class="place-pagination">
+    <%= will_paginate %>
+  </div>
+</div>
