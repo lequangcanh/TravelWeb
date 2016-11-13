@@ -4,10 +4,14 @@
   <% @places.each do |place| %>
     <div class="row list-place">
       <div class="col-md-5 col-md-offset-1">
-        <img src="/uploads/place_photo/image/9/173.jpg" alt="<%= place.name %>" height="200px" width="100%">
+        <% if place.place_photos.empty? %>
+          <img src="travel-default.jpg", height="200px", width="auto">
+        <% else %>
+          <%= image_tag place.place_photos.first.try(:image).try(:url), height: '200px', width: 'auto' %>
+        <% end %>
       </div>
       <div class="col-md-5 col-md-offset-1">
-        <h1> <%= link_to place.name, place_path(place) %> </h1>
+        <h1> <%= link_to place.name, place_path(place), method: :get %> </h1>
         <p> <%= place.description %> </p>
       </div>
     </div>

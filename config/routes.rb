@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'restaurants/index'
+
   namespace :admin do
   	root 'home#index'
     resources :users

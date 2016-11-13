@@ -1,17 +1,17 @@
 <%= render 'partials/header' %>
 
 <div class="container">
-  <%= form_tag(hotels_path, :method => "get", id: "search-form") do %>
+  <%= form_tag(restaurants_path, :method => "get", id: "search-form") do %>
    <div class="row search-hotel">
    	  <div class="col-md-3">
-   	  	<h3>Find a hotel:</h3>
+   	  	<h3>Find a restaurant:</h3>
    	  </div>
    	  <div class="col-md-4">
    	    <%= select_tag('province_id', options_from_collection_for_select(@provinces, 'id', 'name'), prompt: 'City, Province...', class: 'form-control') %>
    	  </div>
    	  <div class="col-md-4">
-   	    <%= text_field_tag :search, params[:hotels], 
-                  placeholder: "Search Hotels ....", class: "form-control" %>
+   	    <%= text_field_tag :search, params[:restaurants], 
+                  placeholder: "Search Restaurants ....", class: "form-control" %>
    	  </div>
    	  <div class="col-md-1">
    	    <%= submit_tag "Search", class: "btn btn-default" %>
@@ -21,19 +21,19 @@
 </div>
 
 <div class="container">
-  <% @hotels.each do |hotel| %>
+  <% @restaurants.each do |restaurant| %>
     <div class="row list-place">
       <div class="col-md-5 col-md-offset-1">
-       <% if hotel.hotel_photos.empty? %>
-          <img src="hotel-default.jpeg", height="200px", width="auto">
+        <% if restaurant.restaurant_photos.empty? %>
+          <img src="restaurant-default.jpeg", height="200px", width="auto">
         <% else %>
-          <%= image_tag hotel.hotel_photos.first.try(:image).try(:url), height: '200px', width: 'auto' %>
+          <%= image_tag restaurant.restaurant_photos.first.try(:image).try(:url), height: '200px', width: 'auto' %>
         <% end %>
       </div>
       <div class="col-md-5 col-md-offset-1">
-        <h1> <%= link_to hotel.name, hotel_path(hotel), method: :get %> </h1>
-        <h4> <%= hotel.province.name %> </h4>
-        <p> <%= hotel.details %> </p>
+        <h1> <%= link_to restaurant.name, hotel_path(restaurant), method: :get %> </h1>
+        <h4> <%= restaurant.province.name %> </h4>
+        <p> <%= restaurant.details %> </p>
       </div>
     </div>
     <hr>
