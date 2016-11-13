@@ -3,4 +3,8 @@ class PlacePhoto < ApplicationRecord
   mount_uploader :image, PhotoUploader
 
   validates :image, presence: true
+
+  def filename
+    File.basename(image.path)
+  end
 end

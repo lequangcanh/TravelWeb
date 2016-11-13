@@ -24,7 +24,7 @@
       <td> <%= place.id %> </td>
       <td> <%= place.name %> </td>
       <td> <%= Province.find(place.province_id).name %> </td>
-      <td> <%= button_to "Details", admin_place_path(place), method: :get, 
+      <td> <%= button_to "Details", place_path(place), method: :get, 
           class: "btn btn-default" %> </td>
       <td> <%= button_to "Edit", edit_admin_place_path(place), method: :get, 
           class: "btn btn-primary" %> </td>

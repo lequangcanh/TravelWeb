@@ -17,6 +17,33 @@ class PlacesController < ApplicationController
   def new
     @place = Place.new
     @provinces = Province.all
+    @photos = @place.place_photos
+  end
+
+  def edit
+    @place = Place.find(params[:id])
+    @provinces = Province.all
+    @photos = @place.place_photos.all
+    gon.photosUrl = @photos.map { |photo| photo.image.url }
+    gon.previewConfigs = @photos.map { |photo|
+      {
+        caption: photo.filename,
+        size: photo.image.size,
+        frameAttr: {'data-id': photo.id}
+      }
+    }
+    render :new
+  end
+
+  def update
+    result = update_place(params)
+    if result[:errors].empty?
+      flash.now[:success] = "#{result[:place].name} updated successfully."
+      redirect_to result[:place]
+    else
+      flash.now[:danger] = result[:errors]
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def show

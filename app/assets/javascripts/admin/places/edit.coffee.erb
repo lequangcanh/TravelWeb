@@ -1,0 +1,56 @@
+$(document).on 'turbolinks:load', ->
+  loadPhotos()
+
+  $('#photos').on 'fileloaded', ->
+    removeUploadBtnInPreview()
+    $('.kv-file-remove').unbind('click')
+    bindClickToRemoveBtn()
+
+  bindClickToRemoveBtn()
+
+  $('.fileinput-remove').click ->
+    removeImageId = []
+    bindClickToRemoveBtn()
+
+  $('form.edit_place input[type=submit]').click ->
+    if removeImageId.length > 0
+      $('<input />', {
+        type: 'hidden',
+        name: 'photo_ids_for_delete',
+        value: JSON.stringify(removeImageId)
+      }).appendTo($(this))
+
+# global variables
+removeImageId = []
+
+# setup functions
+bindClickToRemoveBtn = ->
+  $('.kv-file-remove').click (e)->
+    e.preventDefault()
+    if confirm('Do you want to remove this image?')
+      $previewFrame = $(this).closest('.file-preview-frame')
+      if $previewFrame.attr('data-id') != undefined
+        removeImageId.push($previewFrame.attr('data-id'))
+      $previewFrame.fadeOut(700, ->
+        $(this).remove()
+      )
+
+loadPhotos = ->
+  $('#photos').fileinput({
+    overwriteInitial: false,
+    initialPreview: gon.photosUrl,
+    initialPreviewConfig: gon.previewConfigs
+    initialPreviewAsData: true,
+    showUpload: false,
+    showRemove: false,
+    allowedFileTypes: ["image"],
+    uploadUrl: 'somewhere.only.we.know',
+    allowedFileExtensions: ["jpg", "png", "jpeg"],
+    purifyHtml: true
+  })
+
+removeUploadBtnInPreview = ->
+  $('.file-input .kv-file-upload').remove()
+
+removeUploadCheckBtnInPreview = ->
+  $('.file-upload-indicator').remove()
