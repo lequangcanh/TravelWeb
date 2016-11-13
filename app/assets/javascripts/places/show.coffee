@@ -23,5 +23,6 @@ $(document).on 'turbolinks:load', ->
         $commentRow.find('.username strong').text(response.user.name)
         $commentRow.find('.content').text(response.comment.content)
         $commentRow.removeAttr('style')
+        $commentRow.removeClass('sample-comment')
         $commentRow.prependTo($('.comment-posts'))
       )
