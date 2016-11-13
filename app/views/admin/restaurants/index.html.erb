@@ -15,7 +15,7 @@
       <td> <%= r.id %> </td>
       <td> <%= r.name %> </td>
       <td> <%= Province.find(r.province_id).name %> </td>
-      <td> <%= button_to "Details", admin_restaurant_path(r), method: :get, 
+      <td> <%= link_to "Details", restaurant_path(r), target: "_blank", 
           class: "btn btn-default" %> </td>
       <td> <%= button_to "Edit", edit_admin_restaurant_path(r), method: :get, 
           class: "btn btn-primary" %> </td>

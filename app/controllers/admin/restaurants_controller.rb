@@ -1,36 +1,52 @@
 class Admin::RestaurantsController < Admin::BaseController
 
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.paginate(page: params[:page])
+    if params[:search]
+      @restaurants = Restaurant.search(params[:search]).paginate(page: params[:page])
+    else
+      @restaurants = Restaurant.paginate(page: params[:page])
+    end
   end
 
   def new
     @restaurant = Restaurant.new
+    @provinces = Province.all
   end
 
   def create
-    @restaurant = Restaurant.create(restaurant_params)
-    if @restaurant.save
-      redirect_to admin_restaurant_path(@restaurant)
+    result = create_restaurant(params)
+    if result[:errors].empty?
+      flash.now[:success] = "#{params[:restaurant][:name]} created successfully."
+      redirect_to restaurant_path(result[:restaurant])
     else
-      render 'new'
+      flash.now[:danger] = result[:errors]
+      redirect_back(fallback_location: admin_restaurants_path)
     end
-  end
-
-  def show
-    @restaurant = Restaurant.find(params[:id])
   end
 
   def edit
     @restaurant = Restaurant.find(params[:id])
+    @provinces = Province.all
+    @photos = @restaurant.restaurant_photos.all
+    gon.photosUrl = @photos.map { |photo| photo.image.url }
+    gon.previewConfigs = @photos.map { |photo|
+      {
+        caption: photo.filename,
+        size: photo.image.size,
+        frameAttr: {'data-id': photo.id}
+      }
+    }
   end
 
   def update
-    @restaurant = Restaurant.find(params[:id])
-    if @restaurant.update_attributes(restaurant_params)
-      redirect_to admin_restaurant_path(@restaurant)
+    result = update_restaurant(params)
+    if result[:errors].empty?
+      flash.now[:success] = "#{result[:restaurant].name} updated successfully."
+      redirect_to restaurant_path(result[:restaurant])
     else
-      render  'edit'
+      flash.now[:danger] = result[:errors]
+      redirect_back(fallback_location: admin_restaurants_path)
     end
   end
 
@@ -40,8 +56,42 @@ class Admin::RestaurantsController < Admin::BaseController
   end
 
   private
-  def restaurant_params
+  def restaurant_params(params)
     params.require(:restaurant).permit(:name, :province_id,
         :address, :email, :phone, :website, :details)
+  end
+
+  def create_restaurant(params)
+    restaurant = Restaurant.new(restaurant_params(params))
+    Restaurant.transaction do
+      photos = params[:photos].present? ? params[:photos][:files] : []
+      photos.each do |file|
+        restaurant.restaurant_photos.new(image: file)
+      end
+      restaurant.save!
+    end
+    return {restaurant: restaurant, errors: []}
+  rescue ActiveRecord::RecordInvalid => e
+    {restaurant: nil, errors: e.record.errors.full_messages}
+  end
+
+  def update_restaurant(params)
+    restaurant = Restaurant.find(params[:id])
+    Restaurant.transaction do
+      if params[:photo_ids_for_delete].present?
+        photo_ids_for_delete = JSON.parse(params[:photo_ids_for_delete])
+        photo_ids_for_delete.each do |photo_id|
+          RestaurantPhoto.find(photo_id).destroy!
+        end
+      end
+      photos = params[:photos].present? ? params[:photos][:files] : []
+      photos.each do |file|
+        restaurant.restaurant_photos.new(image: file)
+      end
+      restaurant.update!(restaurant_params(params))
+    end
+    return {restaurant: restaurant, errors: []}
+  rescue ActiveRecord::RecordInvalid => e
+    {restaurant: nil, errors: e.record.errors.full_messages}
   end
 end
