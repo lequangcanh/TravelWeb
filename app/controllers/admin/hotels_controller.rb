@@ -1,7 +1,12 @@
 class Admin::HotelsController < Admin::BaseController
 
   def index
-    @hotels = Hotel.all
+    @hotels = Hotel.paginate(page: params[:page])
+    if params[:search]
+      @hotels = Hotel.search(params[:search]).paginate(page: params[:page])
+    else
+      @hotels = Hotel.paginate(page: params[:page])
+    end
   end
 
   def new

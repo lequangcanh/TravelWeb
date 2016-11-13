@@ -1,7 +1,17 @@
 <h1>List Hotels</h1>
 
-<%= button_to "Create new Hotel", new_admin_hotel_path, method: :get, 
-    class: "btn btn-primary" %>
+<div class="row">
+  <div class="col-md-3">
+    <%= button_to "Create new hotel", new_admin_hotel_path, method: :get, 
+        class: "btn btn-primary" %>
+  </div>
+  <div class="col-md-9">
+    <%= form_tag(admin_hotels_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Hotels" %>
+      <%= submit_tag "Search", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
 
 <table class="table">
   <tr>
@@ -25,3 +35,4 @@
   <% end %>
 </table>
 
+<%= will_paginate %>

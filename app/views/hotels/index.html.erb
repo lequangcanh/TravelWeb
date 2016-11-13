@@ -1,0 +1,39 @@
+<%= render 'partials/header' %>
+
+<div class="container">
+  <%= form_tag(hotels_path, :method => "get", id: "search-form") do %>
+   <div class="row search-hotel">
+   	  <div class="col-md-3">
+   	  	<h3>Find a hotel:</h3>
+   	  </div>
+   	  <div class="col-md-4">
+   	    <%= select_tag('province_id', options_from_collection_for_select(@provinces, 'id', 'name'), prompt: 'City, Province...', class: 'form-control') %>
+   	  </div>
+   	  <div class="col-md-4">
+   	    <%= text_field_tag :search, params[:hotels], 
+                  placeholder: "Search Hotels ....", class: "form-control" %>
+   	  </div>
+   	  <div class="col-md-1">
+   	    <%= submit_tag "Search", class: "btn btn-default" %>
+   	  </div>
+   </div>
+  <% end %>
+</div>
+
+<div class="container">
+  <% @hotels.each do |hotel| %>
+    <div class="row list-place">
+      <div class="col-md-5 col-md-offset-1">
+        <img src="/uploads/place_photo/image/9/173.jpg" alt="<%= hotel.name %>" height="200px" width="100%">
+      </div>
+      <div class="col-md-5 col-md-offset-1">
+        <h1> <%= link_to hotel.name, hotel_path(hotel) %> </h1>
+        <p> <%= hotel.details %> </p>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+  <div class="place-pagination">
+    <%= will_paginate %>
+  </div>
+</div>

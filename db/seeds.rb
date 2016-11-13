@@ -38,3 +38,9 @@ end
                password:              password,
                password_confirmation: password)
 end
+
+200.times do
+  Hotel.create(name: Faker::Company.name,
+               details: Faker::Lorem.paragraph(2),
+               province_id: Faker::Number.between(1, 63))
+end
