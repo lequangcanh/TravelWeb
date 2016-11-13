@@ -20,7 +20,7 @@ class PlacesController < ApplicationController
       {
         caption: photo.filename,
         size: photo.image.size,
-        frameAttr: {'data-id': photo.id}
+        frameAttr: {'data-id' => photo.id}
       }
     }
     render :new
@@ -39,7 +39,8 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
-    @comments = @place.place_comments
+    @comment = PlaceComment.new if current_user.present?
+    @comments = @place.place_comments.order(created_at: :desc)
     @place.view_count += 1
     @place.save!
   end
