@@ -10,7 +10,7 @@
 
     <div class="form-group">
       <%= label_tag :province_id, "Province: " %>
-      <%= f.select :province_id, options_for_select(@provinces.map { |u| [u.name, u.id] }), {}, class:"form-control" %>
+      <%= f.select :province_id, options_for_select(@provinces.map { |u| [u.name, u.id] }, @place.province_id), {}, class:"form-control" %>
     </div>
 
     <div class="form-group">
@@ -22,7 +22,7 @@
       <label for="file">Photos: </label> <%= file_field :photos, :files, multiple: "multiple", accept: "image/*", id: "photos", class:"file" %>
       <div class="clearfix"></div>
     </div>
-    
+
     <%= f.submit 'Save change', class: "btn btn-primary" %>
   <% end %>
 </div>

@@ -1,67 +1,100 @@
 <%= render 'partials/navbar' %>
 <%= render 'partials/notification' %>
+<div class="represent-image">
+  <%= image_tag @represent_image.image.url, width: '100%' %>
+  <button class="btn btn-default" type="button" name="button">View images</button>
+</div>
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <h1><%= @place.name %></h1>
       <p><%= @place.description %></p>
+      <div class="rest-places">
+        <h3>Stop by to rest</h3>
+        <div class="slider">
+          <% @rest_places.each do |place| %>
+            <div class="col-md-4">
+              <div class=""><%= image_tag place.avatar.try(:url) || 'http://www.thetipz.net/wp-content/themes/Avada/images/983224.jpg' %></div>
+              <h3 class=""><%= place.name %></h3>
+              <div><span>Type: </span><span><%= place.class.name %></span></div>
+              <div><span>Address: </span><span><%= place.address %></span></div>
+              <div><span>Phone: </span><span><%= place.phone %></span></div>
+              <div><span>Website: </span><span><%= link_to place.website, target: '_blank' %></span></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="comments">
+        <h3>Comments</h3>
+        <% if current_user.present? %>
+          <div class="row">
+            <div class="col-md-1"><img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/></div>
+            <div class="col-md-11 comment-creation">
+              <%= form_for @comment, url: place_place_comments_path(@place) do |f| %>
+                <input type="hidden" name="place_id" value="<%= @place.id %>">
+                <input type="hidden" name="user_id" value="<%= current_user.id %>">
+                <textarea name="content" style="width:100%; overflow-y:scroll" rows="3"></textarea>
+                <%= f.submit %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <div class="comment-posts">
+          <div class="row sample-comment" style="display:none;">
+            <div class="col-md-1 user-image">
+              <img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/>
+            </div>
+            <div class="col-md-11">
+              <p class="username"><strong></strong></p>
+              <p class="content"></p>
+            </div>
+          </div>
+          <% @comments.each do |comment| %>
+            <div class="row">
+              <div class="col-md-1 user-image">
+                <img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/>
+              </div>
+              <div class="col-md-11">
+                <p class="username"><strong><%= comment.user.name %></strong></p>
+                <p class="content"><%= comment.content %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <div class="responsivewrapper">
-        <div class="hold">
-          <div class="slider-for">
+    <div class="col-md-4">
+      <h2>Nearby places</h2>
+      <% @nearby_places.each do |place| %>
+        <div class="row nearby-places">
+          <div class="col-md-4">
+            <% image_src = place.place_photos.first.try(:image).try(:url) || 'http://www.thetipz.net/wp-content/themes/Avada/images/983224.jpg' %>
+            <%= image_tag image_src, width: '100%' %>
+          </div>
+          <div class="col-md-8">
+            <h3><%= place.name %></h3>
+            <p><%= place.description %></p>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>
+
+<div class="modal fade" id='images-modal' role='dialog'>
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body images-slider">
+        <div class="slider-for">
+        </div>
+        <div class="slider-wrapper">
+          <div class="slider-nav">
             <% @place.place_photos.each do |photo| %>
               <div><%= image_tag(photo.image.url) %></div>
             <% end %>
           </div>
         </div>
       </div>
-      <div class="slider-nav">
-        <% @place.place_photos.each do |photo| %>
-          <div><%= image_tag(photo.image.url) %></div>
-        <% end %>
-      </div>
     </div>
-  </div>
-</div>
-
-<div class="container">
-  <h3>Comments</h3>
-  <% if current_user.present? %>
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-1"><img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/></div>
-        <div class="col-md-11 comment-creation">
-          <%= form_for @comment, url: place_place_comments_path(@place) do |f| %>
-            <input type="hidden" name="place_id" value="<%= @place.id %>">
-            <input type="hidden" name="user_id" value="<%= current_user.id %>">
-            <textarea name="content" style="width:100%; overflow-y:scroll" rows="3"></textarea>
-            <%= f.submit %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <div class="col-md-8 comment-posts">
-    <div class="row sample-comment" style="display:none;">
-      <div class="col-md-1 user-image">
-        <img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/>
-      </div>
-      <div class="col-md-11">
-        <p class="username"><strong></strong></p>
-        <p class="content"></p>
-      </div>
-    </div>
-    <% @comments.each do |comment| %>
-      <div class="row">
-        <div class="col-md-1 user-image">
-          <img src="http://makerepo.com/assets/default-avatar-19cf8cebb96b4d8beff4ef9cad0e5903d288c778c503777332a57085a65371be.png" alt="" width="50px" height="50px"/>
-        </div>
-        <div class="col-md-11">
-          <p class="username"><strong><%= comment.user.name %></strong></p>
-          <p class="content"><%= comment.content %></p>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>
