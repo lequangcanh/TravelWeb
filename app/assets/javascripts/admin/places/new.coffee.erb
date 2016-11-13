@@ -1,0 +1,10 @@
+$(document).on 'turbolinks:load', ->
+  console.log('nah')
+  $('#photos').fileinput({
+    showUpload: false,
+    allowedFileTypes: ["image"],
+    uploadUrl: 'somewhere.only.we.know',
+    allowedFileExtensions: ["jpg", "png", "jpeg"]
+  })
+  # $('#photos').on 'fileloaded', ->
+  #   $('.file-input .kv-file-upload').remove()

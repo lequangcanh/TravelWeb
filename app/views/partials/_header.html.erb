@@ -31,7 +31,7 @@
                   <ul class="dropdown-menu">
                     <% if current_user.is_admin? %>
                       <li><%= link_to('Admin Panel', admin_root_path, 
-                          method: :get) %></li>
+                          method: :get, target: "_blank") %></li>
                     <% end %>
                     <li><%= link_to('Edit Profile', edit_user_registration_path, 
                         method: :get) %></li>
