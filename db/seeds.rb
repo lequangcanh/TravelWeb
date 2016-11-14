@@ -82,17 +82,31 @@ Place.all.each do |place|
 end
 
 100.times do
-  Hotel.create(name: Faker::Company.name,
-               details: Faker::Lorem.paragraph(2),
-               website: Faker::Internet.domain_name,
-               phone: Faker::PhoneNumber.phone_number,
-               province_id: Faker::Number.between(1, 63))
-end
-
-100.times do
-  Restaurant.create(name: Faker::Company.name,
+  path ||= Dir.pwd << '/data/hotels'
+  entries = Dir.entries(path).map { |e| path + '/' + e }
+               .select! { |e| File.file? e }
+  file = File.open(entries[Faker::Number.between(0, entries.length - 1)])
+  hotel = Hotel.new(name: Faker::Company.name,
                     details: Faker::Lorem.paragraph(2),
                     website: Faker::Internet.domain_name,
                     phone: Faker::PhoneNumber.phone_number,
                     province_id: Faker::Number.between(1, 63))
+  photo = hotel.hotel_photos.new
+  photo.image = file
+  hotel.save!
+end
+
+100.times do
+  path ||= Dir.pwd << '/data/restaurants'
+  entries = Dir.entries(path).map { |e| path + '/' + e }
+               .select! { |e| File.file? e }
+  file = File.open(entries[Faker::Number.between(0, entries.length - 1)])
+  restaurant = Restaurant.new(name: Faker::Company.name,
+                              details: Faker::Lorem.paragraph(2),
+                              website: Faker::Internet.domain_name,
+                              phone: Faker::PhoneNumber.phone_number,
+                              province_id: Faker::Number.between(1, 63))
+  photo = restaurant.restaurant_photos.new
+  photo.image = file
+  restaurant.save!
 end
