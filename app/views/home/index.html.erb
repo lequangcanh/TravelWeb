@@ -9,10 +9,9 @@
           <div class="col-md-8 col-xs-6 responsivewrapper">
             <div class="hold">
               <div class="place-images">
-                <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
-                <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
-                <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
-                <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
+                <% place.banner_photos.each do |photo| %>
+                  <div class="image-holder"><%= image_tag photo.image.url %></div>
+                <% end %>
               </div>
             </div>
           </div>
@@ -28,10 +27,9 @@
           <div class="col-md-8 col-xs-6 responsivewrapper">
             <div class="hold">
               <div class="place-images">
-                <div class="image-holder"><img src="http://dulichbana.vn/wp-content/uploads/2015/02/bana1.jpg" alt="" /></div>
-                <div class="image-holder"><img src="http://admin.ductravel.com/cdn/media/1/da%20nang/bana-hills-5.jpg" alt="" /></div>
-                <div class="image-holder"><img src="https://danangprivatetaxi.files.wordpress.com/2015/06/bana-hills-danang-city.jpg" alt="" /></div>
-                <div class="image-holder"><img src="http://danangexplorer.com/wp-content/uploads/ba-na-51.jpg" alt="" /></div>
+                <% place.banner_photos.each do |photo| %>
+                  <div class="image-holder"><%= image_tag photo.image.url %></div>
+                <% end %>
               </div>
             </div>
           </div>

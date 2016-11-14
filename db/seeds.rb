@@ -5,6 +5,27 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# return list of indexs of files in data/photos randomly
+def file_indexes
+  number_of_photos = 73
+  number_of_photos_for_place = Faker::Number.between(5, 10)
+  indexes = []
+  until indexes.length == number_of_photos_for_place
+    index = Faker::Number.between(0, number_of_photos)
+    indexes << index unless indexes.include? index
+  end
+  indexes
+end
+
+def file_list(path=nil)
+  path ||= Dir.pwd << '/data/photos'
+  entries = Dir.entries(path).map { |e| path + '/' + e }
+               .select! { |e| File.file? e }
+  indexes = file_indexes
+  entries.select.with_index { |_, index| indexes.include? index }
+end
+
 province_names = ['An Giang', 'Bà Rịa - Vũng Tàu', 'Bắc Giang', 'Bắc Kạn',
                   'Bạc Liêu', 'Bắc Ninh', 'Bến Tre', 'Bình Định', 'Bình Dương',
                   'Bình Phước', 'Bình Thuận', 'Cà Mau', 'Cao Bằng', 'Đắk Lắk',
@@ -24,9 +45,16 @@ province_names.each { |province_name|
 }
 
 120.times do
-  Place.new(name: Faker::Company.name,
-            description: Faker::Lorem.paragraph(2),
-            province_id: Faker::Number.between(1, 63)).save(validate: false)
+  place = Place.new(name: Faker::Company.name,
+                    description: Faker::Lorem.paragraph(2),
+                    province_id: Faker::Number.between(1, 63))
+  photos = []
+  file_list.each do |file|
+    photo = place.place_photos.new
+    photo.image = File.open(file)
+    photos << photo
+  end
+  place.save!
 end
 
 99.times do |n|
