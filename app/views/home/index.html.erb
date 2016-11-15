@@ -16,12 +16,12 @@
             </div>
           </div>
           <div class="col-md-4 col-xs-6">
-            <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
+            <h2><%= link_to place.name, place_path(place) %></h2>
             <p><%= place.description%></p>
           </div>
         <% else %>
           <div class="col-md-4 col-xs-6">
-            <h2><a href="<%=place_path(place)%>"><%= place.name %></a></h2>
+            <h2><%= link_to place.name, place_path(place) %></h2>
             <p><%= place.description%></p>
           </div>
           <div class="col-md-8 col-xs-6 responsivewrapper">

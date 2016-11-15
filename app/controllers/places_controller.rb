@@ -2,6 +2,16 @@ class PlacesController < ApplicationController
   include Places
 
   def index
+    @provinces = Province.all
+    if params[:province_id].nil?
+      @places = Place.paginate(page: params[:page])
+    else
+      if params[:province_id].empty?
+        @places = Place.search(params[:search]).paginate(page: params[:page])
+      else
+        @places = Place.search(params[:search], params[:province_id]).paginate(page: params[:page])
+      end
+    end
   end
 
   def show
