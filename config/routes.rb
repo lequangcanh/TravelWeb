@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :place_comments, only: [:create, :destroy, :update]
   end
 
+  resources :restaurants
+  resources :hotels
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 end

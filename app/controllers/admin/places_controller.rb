@@ -1,4 +1,5 @@
 class Admin::PlacesController < Admin::BaseController
+  include Places
 
   def index
     @places = Place.paginate(page: params[:page])
@@ -34,7 +35,7 @@ class Admin::PlacesController < Admin::BaseController
       {
         caption: photo.filename,
         size: photo.image.size,
-        frameAttr: {'data-id': photo.id}
+        frameAttr: {'data-id' => photo.id}
       }
     }
   end
@@ -53,44 +54,5 @@ class Admin::PlacesController < Admin::BaseController
   def destroy
     Place.find(params[:id]).destroy
     redirect_to admin_places_path
-  end
-
-  private 
-  def place_params(params)
-    params.require(:place).permit(:name, :description, :province_id)
-  end
-
-  def create_place(params)
-    place = Place.new(place_params(params))
-    Place.transaction do
-      photos = params[:photos].present? ? params[:photos][:files] : []
-      photos.each do |file|
-        place.place_photos.new(image: file)
-      end
-      place.save!
-    end
-    return {place: place, errors: []}
-  rescue ActiveRecord::RecordInvalid => e
-    {place: nil, errors: e.record.errors.full_messages}
-  end
-
-  def update_place(params)
-    place = Place.find(params[:id])
-    Place.transaction do
-      if params[:photo_ids_for_delete].present?
-        photo_ids_for_delete = JSON.parse(params[:photo_ids_for_delete])
-        photo_ids_for_delete.each do |photo_id|
-          PlacePhoto.find(photo_id).destroy!
-        end
-      end
-      photos = params[:photos].present? ? params[:photos][:files] : []
-      photos.each do |file|
-        place.place_photos.new(image: file)
-      end
-      place.update!(place_params(params))
-    end
-    return {place: place, errors: []}
-  rescue ActiveRecord::RecordInvalid => e
-    {place: nil, errors: e.record.errors.full_messages}
   end
 end

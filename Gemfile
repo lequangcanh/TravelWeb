@@ -15,9 +15,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+# Pagination
 gem 'will_paginate',           '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
-gem 'devise'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 # Uploading files
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+# Image processing
+gem 'mini_magick'
 # Bring controller variables to JS
 gem 'gon'
 # Use Redis adapter to run Action Cable in production

@@ -1,17 +1,12 @@
 $(document).on 'turbolinks:load', ->
-  $('.slider-for').slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    fade: true,
-    asNavFor: '.slider-nav'
-  })
   $('.slider-nav').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
-    asNavFor: '.slider-for',
     focusOnSelect: true,
+    variableWidth: true,
+    centerMode: true
   })
+
   $('#new_place_comment input[type=submit]').click (e)->
     e.preventDefault()
     $commentForm = $('#new_place_comment')
@@ -26,3 +21,22 @@ $(document).on 'turbolinks:load', ->
         $commentRow.removeClass('sample-comment')
         $commentRow.prependTo($('.comment-posts'))
       )
+
+  $('.represent-image').click ->
+    $('#images-modal').modal('show')
+
+  $('#images-modal').on 'show.bs.modal', ->
+    changeSlide()
+
+  $('.images-slider .slider-nav').on 'afterChange', ->
+    changeSlide()
+
+  $('.rest-places .slider').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    focusOnSelect: true,
+  })
+
+changeSlide = ->
+  $('.slider-for').children().remove()
+  $('.slider-nav .slick-current img').clone().appendTo('.slider-for')

@@ -7,4 +7,8 @@ class PlacePhoto < ApplicationRecord
   def filename
     File.basename(image.path)
   end
+
+  def represent_image
+    # select landscape image
+  end
 end

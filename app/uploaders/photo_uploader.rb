@@ -44,6 +44,11 @@ class PhotoUploader < CarrierWave::Uploader::Base
     /image\//
   end
 
+  def landscape?
+    img = MiniMagick::Image.open(model.image.path)
+    img[:width].to_f / img[:height] >= 1.3
+  end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
