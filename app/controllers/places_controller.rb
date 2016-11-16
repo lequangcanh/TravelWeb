@@ -3,6 +3,15 @@ class PlacesController < ApplicationController
 
   def index
     @provinces = Province.all
+    if params[:province_id].present? && params[:search].present?
+      @title = "Search for #{params[:search]} in #{Province.find(params[:province_id]).name}"
+    elsif params[:province_id].present? && params[:search].blank?
+      @title = "Search for places in #{Province.find(params[:province_id]).name}"
+    elsif params[:province_id].blank? && params[:search].present?
+      @title = "Search for #{params[:search]}"
+    else
+      @title = 'All places'
+    end
     if params[:province_id].nil?
       @places = Place.paginate(page: params[:page])
     else
