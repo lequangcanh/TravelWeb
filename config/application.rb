@@ -20,21 +20,21 @@ module TravelWeb
     # Precompile Bootstrap fonts
     config.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
     config.assets.precompile << %r(slick-carousel/slick/fonts/[\w-]+\.(?:eot|svg|ttf|woff?)$)
-    config.assets.precompile << Proc.new { |path|
-      if path =~ /\.(coffee|erb|js|scss)\z/
-        full_path = Rails.application.assets.resolve(path)
-        app_assets_path = Rails.root.join('app', 'assets').to_path
-        if full_path.starts_with? app_assets_path
-          # puts "including asset: " + full_path
-          true
-        else
-          # puts "excluding asset: " + full_path
-          false
-        end
-      else
-        false
-      end
-    }
+    # config.assets.precompile << Proc.new { |path|
+    #   if path =~ /\.(coffee|erb|js|scss)\z/
+    #     full_path = Rails.application.config.assets.resolve(path)
+    #     app_assets_path = Rails.root.join('app', 'assets').to_path
+    #     if full_path.starts_with? app_assets_path
+    #       # puts "including asset: " + full_path
+    #       true
+    #     else
+    #       # puts "excluding asset: " + full_path
+    #       false
+    #     end
+    #   else
+    #     false
+    #   end
+    # }
     # Minimum Sass number precision required by bootstrap-sass
     ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
 
