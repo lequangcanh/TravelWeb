@@ -57,9 +57,14 @@ province_names.each { |province_name|
   place.save!
 end
 
+User.create!(name: "Admin",
+             email: "admin@greenmile.com",
+             password: "123456",
+             password_confirmation: "123456",
+             is_admin: true)
 99.times do |n|
   name  = Faker::Name.name
-  email = "example-#{n + 1}@travel.org"
+  email = "example-#{n + 1}@greenmile.com"
   password = 'password'
   begin
     User.create!(name:  name,
