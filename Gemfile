@@ -61,6 +61,9 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'fog-google'
+  gem 'google-api-client', '> 0.8.5', '< 0.9'
+  gem 'mime-types'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
