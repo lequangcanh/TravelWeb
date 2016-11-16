@@ -25,7 +25,3 @@ public/uploads/
 
 # Bowere
 bower_components/
-
-# Environment
-.rbenv-gemsets
-.ruby-version
