@@ -1,5 +1,6 @@
 if Rails.env.production?
   CarrierWave.configure do |config|
+    config.fog_provider = 'fog/google'
     config.fog_credentials = {
       provider: 'Google',
       google_storage_access_key_id: Rails.application.secrets.gg_storage_access_key,
