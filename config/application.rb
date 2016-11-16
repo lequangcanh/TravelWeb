@@ -19,7 +19,7 @@ module TravelWeb
 
     # Precompile Bootstrap fonts
     config.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
-    config.assets.precompile << %r(assets/javascripts/[\w-]*/*[\w-]+\.(?:coffee?)$)
+    config.assets.precompile << %r(app/assets/javascripts/[\w-]*/*[\w-]+\.(?:coffee?)$)
     # Minimum Sass number precision required by bootstrap-sass
     ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
 
