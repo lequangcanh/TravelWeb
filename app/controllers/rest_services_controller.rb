@@ -1,5 +1,4 @@
 class RestServicesController < ApplicationController
-
   def index
     province_id = params[:province_id]
     type = params[:type].to_i

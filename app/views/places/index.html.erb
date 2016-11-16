@@ -1,16 +1,17 @@
 <%= render 'partials/header' %>
 
 <div class="container">
+  <h1 class="text-center"><%= @title %></h1>
   <% @places.each do |place| %>
     <div class="row list-place">
-      <div class="col-md-5 col-md-offset-1">
+      <div class="col-md-6">
         <% if place.place_photos.empty? %>
-          <img src="travel-default.jpg", height="200px", width="auto">
+          <img src="travel-default.jpg", height="auto", width="100%">
         <% else %>
-          <%= image_tag place.place_photos.first.try(:image).try(:url), height: '200px', width: 'auto' %>
+          <%= image_tag place.represent_photo.image.url, height: 'auto', width: '100%' %>
         <% end %>
       </div>
-      <div class="col-md-5 col-md-offset-1">
+      <div class="col-md-6">
         <h1> <%= link_to place.name, place_path(place), method: :get %> </h1>
         <p> <%= place.description %> </p>
       </div>
