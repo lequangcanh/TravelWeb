@@ -16,12 +16,12 @@
             </div>
           </div>
           <div class="col-md-4 col-xs-6">
-            <h2><%= link_to place.name, place_path(place) %></h2>
+            <h2><%= link_to place.name, place_path(place), method: :get %></h2>
             <p><%= place.description%></p>
           </div>
         <% else %>
           <div class="col-md-4 col-xs-6">
-            <h2><%= link_to place.name, place_path(place) %></h2>
+            <h2><%= link_to place.name, place_path(place), method: :get %></h2>
             <p><%= place.description%></p>
           </div>
           <div class="col-md-8 col-xs-6 responsivewrapper">
@@ -38,7 +38,7 @@
     <% end %>
   </section>
   <section class="more-places">
-    <h1 class="title text-center"><%= link_to('Explore more', places_path,) %></h1>
+    <h1 class="title text-center"><%= link_to('Explore more', places_path) %></h1>
     <div class="slider-wrapper">
       <div class="row recent-places">
         <% @recent_places.each do |place| %>

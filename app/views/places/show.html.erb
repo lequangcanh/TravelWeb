@@ -2,7 +2,7 @@
 <%= render 'partials/notification' %>
 <div class="represent-image">
   <% if @represent_photo.nil? %>
-    <img src="http://www.thetipz.net/wp-content/themes/Avada/images/983224.jpg" alt="<%= @place.name %>", width="100%" >
+    <img src="/data/shared/not-found.jpg" alt="<%= @place.name %>", width="100%" >
   <% else %>
     <%= image_tag @represent_photo.image.url, width: '100%' %>
   <% end %>
