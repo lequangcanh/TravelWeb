@@ -1,12 +1,7 @@
 class Admin::HotelsController < Admin::BaseController
 
   def index
-    @hotels = Hotel.paginate(page: params[:page])
-    if params[:search]
-      @hotels = Hotel.search(params[:search]).paginate(page: params[:page])
-    else
-      @hotels = Hotel.paginate(page: params[:page])
-    end
+    @hotels = params[:search].present? ? Hotel.search(params[:search]).paginate(page: params[:page]) : Hotel.paginate(page: params[:page])
   end
 
   def new
@@ -62,7 +57,7 @@ class Admin::HotelsController < Admin::BaseController
 
   private
   def hotel_params(params)
-    params.require(:hotel).permit(:name, :province_id, :address, :phone, 
+    params.require(:hotel).permit(:name, :province_id, :address, :phone,
         :email, :website, :details)
   end
 
@@ -83,12 +78,9 @@ class Admin::HotelsController < Admin::BaseController
   def update_hotel(params)
     hotel = Hotel.find(params[:id])
     Hotel.transaction do
-      if params[:photo_ids_for_delete].present?
-        photo_ids_for_delete = JSON.parse(params[:photo_ids_for_delete])
-        photo_ids_for_delete.each do |photo_id|
-          HotelPhoto.find(photo_id).destroy!
-        end
-      end
+      # remove all old image
+      hotel.hotel_photos.delete_all
+      # make new image
       photos = params[:photos].present? ? params[:photos][:files] : []
       photos.each do |file|
         hotel.hotel_photos.new(image: file)
