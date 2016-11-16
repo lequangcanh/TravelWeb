@@ -19,4 +19,3 @@
 //= require bootstrap-fileinput/js/plugins/purify.js
 //= require bootstrap-fileinput/js/fileinput.min.js
 //= require bootstrap-fileinput/themes/fa/theme.js
-//= require_tree .
