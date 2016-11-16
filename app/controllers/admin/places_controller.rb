@@ -2,12 +2,7 @@ class Admin::PlacesController < Admin::BaseController
   include Places
 
   def index
-    @places = Place.paginate(page: params[:page])
-    if params[:search]
-      @places = Place.search(params[:search]).paginate(page: params[:page])
-    else
-      @places = Place.paginate(page: params[:page])
-    end
+      @places = params[:search].present? ? Place.search(params[:search]).paginate(page: params[:page]) : Place.paginate(page: params[:page])
   end
 
   def new
