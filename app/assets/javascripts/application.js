@@ -10,10 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require turbolinks
-//= require_tree .
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
+//= require_tree .
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require slick-carousel/slick/slick.min
 //= require bootstrap-fileinput/js/plugins/canvas-to-blob.min.js
