@@ -25,6 +25,13 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
 
+  config.assets.precompile << proc { |path|
+    return false unless path =~ /\.(coffee|erb|js|scss)\z/
+    full_path = Rails.application.assets.resolve(path)
+    app_assets_path = Rails.root.join('app', 'assets').to_path
+    full_path.starts_with? app_assets_path ? true : false
+  }
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
@@ -83,20 +90,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  config.assets.precompile << proc { |path|
-    if path =~ /\.(coffee|erb|js|scss)\z/
-      full_path = Rails.application.assets.resolve(path)
-      app_assets_path = Rails.root.join('app', 'assets').to_path
-      if full_path.starts_with? app_assets_path
-        # puts "including asset: " + full_path
-        true
-      else
-        # puts "excluding asset: " + full_path
-        false
-      end
-    else
-      false
-    end
-  }
 end

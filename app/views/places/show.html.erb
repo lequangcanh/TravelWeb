@@ -15,17 +15,19 @@
       <p><%= @place.description %></p>
       <div class="rest-places">
         <h3>Stop by to rest</h3>
-        <div class="slider">
-          <% @rest_places.each do |place| %>
-            <div class="col-md-4">
-              <div class=""><%= image_tag place.avatar.try(:url) || 'http://www.thetipz.net/wp-content/themes/Avada/images/983224.jpg' %></div>
-              <h3 class=""><%= place.name %></h3>
-              <div><span>Type: </span><span><%= place.class.name %></span></div>
-              <div><span>Address: </span><span><%= place.address %></span></div>
-              <div><span>Phone: </span><span><%= place.phone %></span></div>
-              <div><span>Website: </span><span><%= link_to place.website, target: '_blank' %></span></div>
-            </div>
-          <% end %>
+        <div class="slider-wrapper">
+          <div class="slider">
+            <% @rest_places.each do |place| %>
+              <div class="col-md-4">
+                <div class=""><%= image_tag place.avatar.try(:url) || 'http://www.thetipz.net/wp-content/themes/Avada/images/983224.jpg' %></div>
+                <h3 class=""><%= place.name %></h3>
+                <div><span>Type: </span><span><%= place.class.name %></span></div>
+                <div><span>Address: </span><span><%= place.address %></span></div>
+                <div><span>Phone: </span><span><%= place.phone %></span></div>
+                <div><span>Website: </span><span><%= link_to place.website, target: '_blank' %></span></div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
       <div class="comments">

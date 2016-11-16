@@ -45,7 +45,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   def landscape?
-    img = MiniMagick::Image.open(model.image.url)
+    location = Rails.env.production? ? model.image.url : model.image.path
+    img = MiniMagick::Image.open(location)
     img[:width].to_f / img[:height] >= 1.3
   end
 
