@@ -29,3 +29,5 @@ bower_components/
 # Environment
 .rbenv-gemsets
 .ruby-version
+
+Gemfile.lock
