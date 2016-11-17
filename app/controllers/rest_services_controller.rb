@@ -3,7 +3,6 @@ class RestServicesController < ApplicationController
     province_id = params[:province_id]
     type = params[:type].to_i
     name = params[:name]
-    binding.pry
     @provinces = Province.all
     restaurants = Restaurant.all
     restaurants.merge!(Restaurant.name_contains(name)) if name.present?
