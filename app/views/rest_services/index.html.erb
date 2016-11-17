@@ -1,0 +1,66 @@
+<%= render 'partials/header' %>
+
+<div class="container">
+  <div class="search-box">
+    <%= form_tag '', action: 'index', method: 'get' do %>
+      <table align="center">
+        <tr>
+          <td><input type="text" name="name" value="<%= params[:name] %>" placeholder="Hotels, Restaurants" class="form-control"></td>
+          <td><%= select_tag :type, options_for_select([['Restaurant', 0], ['Hotels', 1]], params[:type]), include_blank: true, class: "form-control" %></td>
+          <td><%= select_tag :province_id, options_for_select(@provinces.map { |u| [u.name, u.id] }, params[:province_id]), include_blank: true, class: "form-control" %></td>
+        </tr>
+      </table>
+      <input class="btn btn-default" type="submit" value="Search">
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="rest-places-wrapper">
+      <% @rest_places.each do |place| %>
+        <div class="col-md-4 rest-place">
+          <%= image_tag place.photos.first.image.url %>
+          <h3 class="name"><%= link_to "#{place.name}", place %></h3> - <strong><%= place.class.name %></strong>
+          <h5><%= place.province.name %></h5>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="pagination-holder"><%= will_paginate @rest_places %></div>
+</div>
+
+<div class="modal fade" id='rest-place-modal' role='dialog'>
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title"></h3>
+      </div>
+      <div class="modal-body">
+        <div class="holder">
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <p class="details"></p>
+          </div>
+          <div class="col-md-4">
+            <table class="rest-place-info table">
+              <tbody>
+                <tr>
+                  <td><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></td>
+                  <td class="phone"></td>
+                </tr>
+                <tr>
+                  <td><span class="glyphicon glyphicon-link" aria-hidden="true"></span></td>
+                  <td class="website"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

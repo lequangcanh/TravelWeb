@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 20161106123631) do
     t.string   "avatar"
     t.text     "description"
     t.integer  "province_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.decimal  "view_count",           default: "0.0"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "view_count",           default: 0
     t.integer  "place_comments_count", default: 0
   end
 

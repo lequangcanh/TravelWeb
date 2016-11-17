@@ -23,7 +23,14 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
+
+  config.assets.precompile << proc { |path|
+    return false unless path =~ /\.(coffee|erb|js|scss)\z/
+    full_path = Rails.application.assets.resolve(path)
+    app_assets_path = Rails.root.join('app', 'assets').to_path
+    full_path.starts_with? app_assets_path ? true : false
+  }
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  get 'restaurants/index'
 
   namespace :admin do
-  	root 'home#index'
+    root 'home#index'
     resources :users
     resources :provinces
     resources :places
@@ -13,15 +12,19 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'
-  resources :hotels
-  resources :restaurants
+  # resources :hotels
+  # resources :restaurants
 
   resources :places, only: [:index, :show] do
     resources :place_comments, only: [:create, :destroy, :update]
   end
 
-  resources :restaurants
-  resources :hotels
+  resources :rest_services do
+    collection do
+      resources :restaurants
+      resources :hotels
+    end
+  end
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 end

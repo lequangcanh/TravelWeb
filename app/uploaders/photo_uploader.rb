@@ -6,7 +6,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   storage :file
-  # storage :fog
+  storage :fog if Rails.env.production?
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -45,7 +45,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   end
 
   def landscape?
-    img = MiniMagick::Image.open(model.image.path)
+    location = Rails.env.production? ? model.image.url : model.image.path
+    img = MiniMagick::Image.open(location)
     img[:width].to_f / img[:height] >= 1.3
   end
 
