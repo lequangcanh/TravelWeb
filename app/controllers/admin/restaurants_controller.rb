@@ -1,12 +1,7 @@
 class Admin::RestaurantsController < Admin::BaseController
 
   def index
-    @restaurants = Restaurant.paginate(page: params[:page])
-    if params[:search]
-      @restaurants = Restaurant.search(params[:search]).paginate(page: params[:page])
-    else
-      @restaurants = Restaurant.paginate(page: params[:page])
-    end
+      @restaurants = params[:search].present? ? Restaurant.search(params[:search]).paginate(page: params[:page]) : Restaurant.paginate(page: params[:page])
   end
 
   def new
