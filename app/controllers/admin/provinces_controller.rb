@@ -1,12 +1,7 @@
 class Admin::ProvincesController < Admin::BaseController
 
   def index
-    @provinces = Province.paginate(page: params[:page])
-    if params[:search]
-      @provinces = Province.search(params[:search]).paginate(page: params[:page])
-    else
-      @provinces = Province.paginate(page: params[:page])
-    end
+    @provinces = params[:search]present? ? Province.search(params[:search]).paginate(page: params[:page]) : Province.paginate(page: params[:page])
   end
 
   def new
