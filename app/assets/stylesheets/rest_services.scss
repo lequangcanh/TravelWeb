@@ -1,3 +1,40 @@
-// Place all the styles related to the rest_services controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.rest-places-wrapper {
+  margin: auto;
+  .rest-place.col-md-4 {
+    float: none;
+    width: 33%;
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    img {
+      width: 100%;
+      height: auto;
+    }
+    .name {
+      display: inline-block;
+    }
+  }
+}
+#rest-place-modal {
+  .holder {
+    text-align: center;
+    margin-bottom: 20px;
+    img {
+      height: 400px;
+      width: auto;
+    }
+  }
+}
+.search-box {
+  margin-top: 20px;
+  text-align: center;
+  table {
+    td {
+      padding: 10px;
+    }
+    margin-bottom: 20px;
+  }
+}
+.pagination-holder {
+  text-align: center;
+}

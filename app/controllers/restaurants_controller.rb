@@ -11,4 +11,10 @@ class RestaurantsController < ApplicationController
       end
     end
   end
+
+  def show
+    place = Restaurant.find(params[:id])
+    province = place.province
+    render json: place.as_json.merge(province: province.as_json)
+  end
 end
