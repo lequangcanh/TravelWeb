@@ -26,3 +26,9 @@ public/assets/
 
 # Bowere
 bower_components/
+
+# Environment
+.rbenv-gemsets
+.ruby-version
+
+Gemfile.lock
